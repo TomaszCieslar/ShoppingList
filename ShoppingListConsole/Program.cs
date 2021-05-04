@@ -7,7 +7,6 @@ namespace ShoppingListConsole
 {
     class Program
     {
-
         static void Main(string[] args)
         {
             int option = 0;
