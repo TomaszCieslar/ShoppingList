@@ -6,7 +6,7 @@ namespace ShoppingListConsole
 {
     class Program
     {
-        static List<Item> ShoppingList = new List<Item>();
+
         static void Main(string[] args)
         {
             int option = 0;
@@ -18,6 +18,8 @@ namespace ShoppingListConsole
             Console.WriteLine("4. Show All");
             Console.WriteLine("5. exit");
 
+            ShoppingListRepository repository = new ShoppingListRepository();
+            
             while (option!=5)
             {
                 Console.Write("Choose option: ");
@@ -26,16 +28,20 @@ namespace ShoppingListConsole
                 switch (option)
                 {
                     case 1:
-                        AddItem();
+                        Item newItem = new Item { 
+                        Name = "Pomidor"
+                        };
+                        repository.AddItem(newItem);
                         break;
                     case 2:
-                        RemoveItem();
+                        repository.DeleteItem(0);
                         break;
                     case 3:
-                        UpdateItem();
+                        Item updateItem = new Item();
+                        repository.UpdateItem(0,updateItem);
                         break;
                     case 4:
-                        ShowAllElements();
+                        repository.GetItems();
                         break;
                     default:
                         break;
@@ -43,45 +49,7 @@ namespace ShoppingListConsole
             }
         }
 
-        static void AddItem()
-        {
-            Console.WriteLine("---Add Item---");
-            Item item = new Item();
-
-            ShoppingList.Add(item);
-        }
-
-        static void UpdateItem()
-        {
-            Console.WriteLine("---Update Item---");
-            Item item = new Item();
-            int id = 0;
-
-            Item element = ShoppingList.FirstOrDefault(element => element.id == id);
-            if (element != null)
-            {
-                element = item;
-            }
-        }
-
-        static void RemoveItem()
-        {
-            Console.WriteLine("---Remove Item---");
-            int id = 0;
-            Item element = ShoppingList.FirstOrDefault(element => element.id == id);
-            if (element != null)
-            {
-                ShoppingList.Remove(element);
-            }
-        }
-
-        static void ShowAllElements()
-        {
-            Console.WriteLine("---Show All---");
-            foreach (var item in ShoppingList)
-            {
-                Console.WriteLine(item.Name);
-            }
-        }
+       
+     
     }
 }
